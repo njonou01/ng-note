@@ -1,14 +1,32 @@
 import { Facebook, Github, Instagram, Twitter } from 'lucide-react';
 import React from 'react'
+
 interface SocialLinkProps {
     href: string,
     Icon: React.ElementType<{ className?: string }>
 }
+interface ColumProps {
+    title: string,
+    links: { href: string, text: string }[]
+}
+
 const SocialLink: React.FC<SocialLinkProps> = ({ href, Icon }) => {
     return (
         <a href={href} className="text-gray-400 hover:text-gray-300">
             <Icon className='text-lg' />
         </a>
+    )
+}
+const Colum: React.FC<ColumProps> = ({ title, links }) => {
+    return (
+        <div>
+            <h3 className="text-sm font-semibold text-white tracking-wider uppercase">{title}</h3>
+            <ul className="mt-4 space-y-4">
+                {links.map((link, index) => (
+                    <li key={index}><a href={link.href} className="text-base text-gray-300 hover:text-white">{link.text}</a></li>
+                ))}
+            </ul>
+        </div>
     )
 }
 const socialNetworks: SocialLinkProps[] = [
@@ -29,22 +47,6 @@ const socialNetworks: SocialLinkProps[] = [
         Icon: Github
     }
 ]
-interface ColumProps {
-    title: string,
-    links: { href: string, text: string }[]
-}
-const Colum: React.FC<ColumProps> = ({ title, links }) => {
-    return (
-        <div>
-            <h3 className="text-sm font-semibold text-white tracking-wider uppercase">{title}</h3>
-            <ul className="mt-4 space-y-4">
-                {links.map((link, index) => (
-                    <li key={index}><a href={link.href} className="text-base text-gray-300 hover:text-white">{link.text}</a></li>
-                ))}
-            </ul>
-        </div>
-    )
-}
 const columns: ColumProps[] = [
     {
         title: 'Produit',
@@ -115,6 +117,8 @@ const columns: ColumProps[] = [
         ]
     }
 ]
+
+
 const Footer: React.FC = () => {
     return (
         <footer className="bg-gray-900 text-white">
@@ -138,5 +142,4 @@ const Footer: React.FC = () => {
         </footer>
     )
 }
-
 export default Footer;
