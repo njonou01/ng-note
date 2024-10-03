@@ -5,11 +5,32 @@ import Navbar from './components/layout/NavBar/Navbar'
 import FeaturesSection from './components/layout/Hero/FeaturesSection'
 import Footer from './components/layout/Hero/Footer'
 import { Lightbulb, Pencil, WandSparkles } from 'lucide-react'
-
+const links: LinkProps[] = [
+  {
+    href: '#',
+    text: 'Fonctionnalités'
+  },
+  {
+    href: '#',
+    text: 'Tarifs'
+  },
+  {
+    href: '#',
+    text: 'Blog'
+  },
+  {
+    href: '#',
+    text: 'Aide'
+  }
+]
+interface LinkProps {
+  href: string,
+  text: string
+}
 function App() {
   return (
     <>
-      <Navbar />
+      <Navbar links={links} />
       <Hero />
       <FeaturesSection />
       <section className="py-20 ">

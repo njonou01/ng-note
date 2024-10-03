@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Brain, RefreshCcw, Zap } from 'lucide-react';
 
 const features: FeatureCardProps[] = [
@@ -26,8 +26,32 @@ interface FeatureCardProps {
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, Icon }) => {
+    const card = useRef<HTMLDivElement>(null)
+    const addShadow = () => {
+        card.current?.classList.add('shadow-lg');
+    }
+    const removeShadow = () => {
+        card.current?.classList.remove('shadow-lg');
+    }
+    useEffect(() => {
+        card.current?.addEventListener('mouseenter', () => {
+            addShadow();
+        });
+        card.current?.addEventListener('mouseleave', () => {
+            removeShadow();
+        });
+        return () => {
+            card.current?.removeEventListener('mouseenter', () => {
+                addShadow();
+            });
+            card.current?.removeEventListener('mouseleave', () => {
+                removeShadow();
+            });
+        }
+    }, [])
+
     return (
-        <div className="feature-card bg-gray-50 p-8 rounded-2xl">
+        <div ref={card} className="feature-card bg-gray-50 p-8 rounded-xl">
             <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
                 <Icon className="text-primary-500 text-xl" />
             </div>
