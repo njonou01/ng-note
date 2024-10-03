@@ -1,4 +1,4 @@
-import { Pencil } from "lucide-react"
+import { LucideMenu, Pencil } from "lucide-react"
 import { useEffect, useRef } from "react"
 interface LinkProps {
     href: string,
@@ -6,8 +6,32 @@ interface LinkProps {
 }
 interface LinksProps { links: LinkProps[] }
 const Link: React.FC<LinkProps> = ({ href, text }) => {
+    const anchor = useRef<HTMLAnchorElement>(null);
+    const moveToTarget = () => {
+        const target = anchor.current?.getAttribute('href');
+        if (target) {
+            document.querySelector(target)?.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    }
+    useEffect(() => {
+        if (!anchor.current) return;
+        anchor.current.addEventListener('click', function (e) {
+            e.preventDefault();
+            moveToTarget();
+        });
+
+        return () => {
+            anchor.current?.removeEventListener('click', function (e) {
+                e.preventDefault();
+                moveToTarget();
+            });
+        }
+    }, [])
+
     return (
-        <a href={href}
+        <a href={href} ref={anchor}
             className="text-gray-600 hover:text-primary-500 transition-colors">
             {text}
         </a>
@@ -47,7 +71,7 @@ const Navbar: React.FC<LinksProps> = ({ links }) => {
                         ))}
                     </div>
                     <button className="md:hidden text-gray-600">
-                        <i className="fas fa-bars text-2xl"></i>
+                        <LucideMenu className="text-2xl" />
                     </button>
                 </div>
             </div>

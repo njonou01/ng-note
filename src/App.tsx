@@ -7,7 +7,7 @@ import Footer from './components/layout/Hero/Footer'
 import { Lightbulb, Pencil, WandSparkles } from 'lucide-react'
 const links: LinkProps[] = [
   {
-    href: '#',
+    href: '#features',
     text: 'Fonctionnalités'
   },
   {
