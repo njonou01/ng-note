@@ -1,6 +1,43 @@
 import React from 'react';
 import { Brain, RefreshCcw, Zap } from 'lucide-react';
 
+const features: FeatureCardProps[] = [
+    {
+        title: 'Prise de notes rapide',
+        description: 'Interface épurée et intuitive pour capturer vos idées instantanément, sans friction.',
+        Icon: Zap
+    },
+    {
+        title: 'Organisation intelligente',
+        description: 'Classement automatique et suggestions contextuelles pour retrouver facilement vos notes.',
+        Icon: Brain
+    },
+    {
+        title: 'Synchronisation multi-appareils',
+        description: 'Accédez à vos notes sur tous vos appareils, toujours à jour et sécurisées.',
+        Icon: RefreshCcw
+    }
+]
+
+interface FeatureCardProps {
+    title: string,
+    description: string,
+    Icon: React.ElementType<{ className?: string }>
+}
+
+const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, Icon }) => {
+    return (
+        <div className="feature-card bg-gray-50 p-8 rounded-2xl">
+            <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
+                <Icon className="text-primary-500 text-xl" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
+            <p className="mt-4 text-gray-600 leading-relaxed">
+                {description}
+            </p>
+        </div>
+    )
+}
 const FeaturesSection: React.FC = () => {
     return (
         <section id="features" className="py-20 bg-white">
@@ -14,33 +51,9 @@ const FeaturesSection: React.FC = () => {
                     </p>
                 </div>
                 <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div className="feature-card bg-gray-50 p-8 rounded-2xl">
-                        <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
-                            <Zap className="text-primary-500 text-xl" />
-                        </div>
-                        <h3 className="text-xl font-semibold text-gray-900">Prise de notes rapide</h3>
-                        <p className="mt-4 text-gray-600 leading-relaxed">
-                            Interface épurée et intuitive pour capturer vos idées instantanément, sans friction.
-                        </p>
-                    </div>
-                    <div className="feature-card bg-gray-50 p-8 rounded-2xl">
-                        <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
-                            <Brain className="text-primary-500 text-xl" />
-                        </div>
-                        <h3 className="text-xl font-semibold text-gray-900">Organisation intelligente</h3>
-                        <p className="mt-4 text-gray-600 leading-relaxed">
-                            Classement automatique et suggestions contextuelles pour retrouver facilement vos notes.
-                        </p>
-                    </div>
-                    <div className="feature-card bg-gray-50 p-8 rounded-2xl">
-                        <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
-                            <RefreshCcw className="text-primary-500 text-xl" />
-                        </div>
-                        <h3 className="text-xl font-semibold text-gray-900">Synchronisation multi-appareils</h3>
-                        <p className="mt-4 text-gray-600 leading-relaxed">
-                            Accédez à vos notes sur tous vos appareils, toujours à jour et sécurisées.
-                        </p>
-                    </div>
+                    {features.map((feature, index) => (
+                        <FeatureCard key={index} {...feature} />
+                    ))}
                 </div>
             </div>
         </section>
