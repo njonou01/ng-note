@@ -1,5 +1,6 @@
 import { ArrowRight, Play } from 'lucide-react'
 import React from 'react'
+import img from '../../../assets/images/4481343.jpg';
 
 export const Hero: React.FC = () => {
     return (
@@ -31,7 +32,7 @@ export const Hero: React.FC = () => {
                     <div className="relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary-300 to-primary-600 rounded-3xl transform rotate-6 animate-float">
                         </div>
-                        <img src="https://via.placeholder.com/600x400" alt="NG-NOTE Interface"
+                        <img src={img} alt="NG-NOTE Interface"
                             className="relative rounded-3xl shadow-2xl" />
                     </div>
                 </div>
